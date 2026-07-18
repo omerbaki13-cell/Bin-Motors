@@ -1,157 +1,385 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OtoGaleri</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bin Motors | sahibinden.com</title>
+    <style>
+        /* Genel Stil Tanımlamaları */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+        body {
+            background-color: #f4f4f6;
+            color: #333;
+        }
 
-body{
-background:#f5f5f5;
-}
+        /* Üst Menü / Navbar */
+        header {
+            background-color: #486074;
+            color: white;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #dfa21a; /* Sahibinden Gold Rengi */
+        }
 
-header{
-background:#111;
-color:white;
-padding:20px;
-text-align:center;
-}
+        .logo h1 {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
 
-header h1{
-font-size:35px;
-}
+        .logo span {
+            color: #dfa21a;
+        }
 
-.search{
-padding:20px;
-text-align:center;
-}
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
 
-.search input{
-width:80%;
-max-width:500px;
-padding:12px;
-border-radius:10px;
-border:1px solid gray;
-}
+        .nav-links a:hover {
+            color: #dfa21a;
+        }
 
-.cars{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-padding:20px;
-}
+        /* Vitrin / Banner Alanı */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://image5.sahibinden.com/stores/logos/54/68/49/efea12e4e8115fb622c877fed030ce9d3be112a6.jpg') no-repeat center center/cover;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
 
-.card{
-background:white;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 5px 10px rgba(0,0,0,.2);
-}
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
 
-.card img{
-width:100%;
-height:200px;
-object-fit:cover;
-}
+        .hero p {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
 
-.info{
-padding:15px;
-}
+        /* Ana Konteyner */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
 
-.info h2{
-font-size:22px;
-margin-bottom:10px;
-}
+        /* Yan Menü (Mağaza Bilgileri ve Filtreler) */
+        .sidebar {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
 
-.price{
-color:red;
-font-size:25px;
-font-weight:bold;
-margin-bottom:10px;
-}
+        .store-info h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f4f4f6;
+            padding-bottom: 10px;
+            color: #486074;
+        }
 
-button{
-width:100%;
-padding:12px;
-background:#ff9800;
-border:none;
-color:white;
-font-size:18px;
-border-radius:10px;
-cursor:pointer;
-}
+        .store-info p {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #666;
+        }
 
-footer{
-margin-top:30px;
-padding:20px;
-background:#111;
-color:white;
-text-align:center;
-}
-</style>
+        .store-info strong {
+            color: #333;
+        }
 
+        .categories {
+            margin-top: 25px;
+        }
+
+        .categories ul {
+            list-style: none;
+        }
+
+        .categories li a {
+            display: block;
+            padding: 8px 0;
+            color: #555;
+            text-decoration: none;
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .categories li a:hover {
+            color: #dfa21a;
+            padding-left: 5px;
+            transition: all 0.2s;
+        }
+
+        /* İlanlar Listesi (Grid) */
+        .listings-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #486074;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .car-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .car-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background-color: #ddd;
+        }
+
+        .car-details {
+            padding: 15px;
+        }
+
+        .car-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .car-specs {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .car-price-location {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        .car-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #dfa21a;
+        }
+
+        .car-location {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Alt Bilgi (Footer) */
+        footer {
+            background-color: #333;
+            color: #ccc;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            font-size: 14px;
+            border-top: 3px solid #dfa21a;
+        }
+
+        /* Responsive Tasarım */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            header {
+                flex-direction: column;
+                padding: 15px;
+                text-align: center;
+            }
+            .nav-links {
+                margin-top: 10px;
+            }
+            .nav-links a {
+                margin: 0 10px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-<h1>🚗 OtoGaleri</h1>
-<p>Hayalinizdeki aracı bulun.</p>
-</header>
+    <!-- Üst Menü -->
+    <header>
+        <div class="logo">
+            <h1>BIN<span>MOTORS</span></h1>
+        </div>
+        <div class="nav-links">
+            <a href="#">Ana Sayfa</a>
+            <a href="#">Tüm İlanlar</a>
+            <a href="#">Hakkımızda</a>
+            <a href="#">İletişim</a>
+        </div>
+    </header>
 
-<div class="search">
-<input type="text" placeholder="Araç Ara...">
-</div>
+    <!-- Banner -->
+    <section class="hero">
+        <h2>Premium Araç Portföyü</h2>
+        <p>Bin Motors güvencesiyle hayalinizdeki araca sahip olun.</p>
+    </section>
 
-<div class="cars">
+    <!-- Ana İçerik -->
+    <div class="container">
+        
+        <!-- Yan Menü -->
+        <aside class="sidebar">
+            <div class="store-info">
+                <h3>Mağaza Bilgileri</h3>
+                <p><strong>Yetkili:</strong> Bin Motors Yetkilisi</p>
+                <p><strong>Telefon:</strong> 0 (212) 000 00 00</p>
+                <p><strong>Adres:</strong> İstanbul / Türkiye</p>
+            </div>
 
-<div class="card">
-<img src="https://picsum.photos/500/300?1">
-<div class="info">
-<h2>Renault Clio 2022</h2>
-<p>⛽ Benzin</p>
-<p>📍 Bursa</p>
-<p>📏 42.000 KM</p>
-<div class="price">950.000 ₺</div>
-<button>İlanı Gör</button>
-</div>
-</div>
+            <div class="categories">
+                <h3>Kategoriler</h3>
+                <p></p>
+                <ul>
+                    <li><a href="#">Tüm İlanlar (6)</a></li>
+                    <li><a href="#">Otomobil (4)</a></li>
+                    <li><a href="#">Arazi, SUV & Pick-up (2)</a></li>
+                </ul>
+            </div>
+        </aside>
 
-<div class="card">
-<img src="https://picsum.photos/500/300?2">
-<div class="info">
-<h2>Toyota Corolla 2021</h2>
-<p>⛽ Hibrit</p>
-<p>📍 İstanbul</p>
-<p>📏 30.000 KM</p>
-<div class="price">1.280.000 ₺</div>
-<button>İlanı Gör</button>
-</div>
-</div>
+        <!-- İlanlar -->
+        <main>
+            <div class="listings-title">
+                <h2>Vitrin İlanları</h2>
+            </div>
 
-<div class="card">
-<img src="https://picsum.photos/500/300?3">
-<div class="info">
-<h2>Fiat Egea 2023</h2>
-<p>⛽ Dizel</p>
-<p>📍 Ankara</p>
-<p>📏 18.000 KM</p>
-<div class="price">1.050.000 ₺</div>
-<button>İlanı Gör</button>
-</div>
-</div>
+            <div class="listings-grid">
+                
+                <!-- İlan 1 -->
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&q=80&w=600" alt="Araç" class="car-img">
+                    <div class="car-details">
+                        <div class="car-title">Porsche 911 Carrera S</div>
+                        <div class="car-specs">2022 | 15.000 KM | Benzin</div>
+                        <div class="car-price-location">
+                            <span class="car-price">12.500.000 TL</span>
+                            <span class="car-location">İstanbul</span>
+                        </div>
+                    </div>
+                </div>
 
-</div>
+                <!-- İlan 2 -->
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=600" alt="Araç" class="car-img">
+                    <div class="car-details">
+                        <div class="car-title">BMW 5 Serisi 520d M Sport</div>
+                        <div class="car-specs">2021 | 45.000 KM | Dizel</div>
+                        <div class="car-price-location">
+                            <span class="car-price">3.850.000 TL</span>
+                            <span class="car-location">Bursa /Osmangazi</span>
+                        </div>
+                    </div>
+                </div>
 
-<footer>
-© 2026 OtoGaleri | Tüm Hakları Saklıdır
-</footer>
+                <!-- İlan 3 -->
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=600" alt="Araç" class="car-img">
+                    <div class="car-details">
+                        <div class="car-title">Mercedes-Benz E-Class E200d</div>
+                        <div class="car-specs">2020 | 60.000 KM | Dizel</div>
+                        <div class="car-price-location">
+                            <span class="car-price">4.100.000 TL</span>
+                            <span class="car-location">İzmir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- İlan 4 -->
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=600" alt="Araç" class="car-img">
+                    <div class="car-details">
+                        <div class="car-title">Land Rover Range Rover Velar</div>
+                        <div class="car-specs">2021 | 32.000 KM | Hibrit</div>
+                        <div class="car-price-location">
+                            <span class="car-price">5.950.000 TL</span>
+                            <span class="car-location">Ankara</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- İlan 5 -->
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=600" alt="Araç" class="car-img">
+                    <div class="car-details">
+                        <div class="car-title">Audi A7 Sportback TFSI</div>
+                        <div class="car-specs">2019 | 75.000 KM | Benzin</div>
+                        <div class="car-price-location">
+                            <span class="car-price">4.450.000 TL</span>
+                            <span class="car-location">İstanbul</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- İlan 6 -->
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600" alt="Araç" class="car-img">
+                    <div class="car-details">
+                        <div class="car-title">Porsche Taycan 4S</div>
+                        <div class="car-specs">2023 | 8.000 KM | Elektrik</div>
+                        <div class="car-price-location">
+                            <span class="car-price">7.200.000 TL</span>
+                            <span class="car-location">Bursa</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Alt Bilgi -->
+    <footer>
+        <p>&copy; 2026 BIN MOTORS. Bu site sahibinden.com kurumsal mağaza konseptinden esinlenerek tasarlanmıştır.</p>
+    </footer>
 
 </body>
 </html>
