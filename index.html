@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bin Motors | Araba Satış</title>
-<meta name="description" content="Güvenilir Araba Satışı.">
+    <meta name="description" content="Güvenilir Araba Satışı.">
     <style>
         /* Genel Stil Tanımlamaları */
         * {
@@ -27,7 +27,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 4px solid #dfa21a; /* Sahibinden Gold Rengi */
+            border-bottom: 4px solid #dfa21a;
         }
 
         .logo h1 {
@@ -40,16 +40,150 @@
             color: #dfa21a;
         }
 
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         .nav-links a {
             color: white;
             text-decoration: none;
-            margin-left: 20px;
             font-size: 14px;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .nav-links a:hover {
             color: #dfa21a;
+        }
+
+        /* Dropdown Ortak Stiller */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-trigger {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            user-select: none;
+        }
+
+        .dropdown-trigger:hover {
+            color: #dfa21a;
+        }
+
+        .dropdown-trigger::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        .dropdown-trigger.active::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            padding: 20px;
+            min-width: 320px;
+            margin-top: 10px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: 20px;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid white;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-menu h4 {
+            color: #486074;
+            font-size: 16px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #dfa21a;
+        }
+
+        .dropdown-menu p {
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .dropdown-menu strong {
+            color: #333;
+        }
+
+        .dropdown-menu .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-gold {
+            background: #dfa21a;
+            color: white;
+        }
+
+        .btn-gold:hover {
+            background: #c78e15;
+        }
+
+        .btn-blue {
+            background: #486074;
+            color: white;
+        }
+
+        .btn-blue:hover {
+            background: #3a4d5c;
+        }
+
+        .team-box {
+            margin-top: 12px;
+            padding: 12px;
+            background: #f9f9f9;
+            border-radius: 6px;
+            border-left: 4px solid #dfa21a;
+        }
+
+        .team-box p {
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        .team-box p:last-child {
+            margin-bottom: 0;
         }
 
         /* Vitrin / Banner Alanı */
@@ -82,59 +216,6 @@
             max-width: 1200px;
             margin: 30px auto;
             padding: 0 20px;
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 30px;
-        }
-
-        /* Yan Menü (Mağaza Bilgileri ve Filtreler) */
-        .sidebar {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            height: fit-content;
-        }
-
-        .store-info h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #f4f4f6;
-            padding-bottom: 10px;
-            color: #486074;
-        }
-
-        .store-info p {
-            font-size: 14px;
-            margin-bottom: 10px;
-            color: #666;
-        }
-
-        .store-info strong {
-            color: #333;
-        }
-
-        .categories {
-            margin-top: 25px;
-        }
-
-        .categories ul {
-            list-style: none;
-        }
-
-        .categories li a {
-            display: block;
-            padding: 8px 0;
-            color: #555;
-            text-decoration: none;
-            font-size: 14px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .categories li a:hover {
-            color: #dfa21a;
-            padding-left: 5px;
-            transition: all 0.2s;
         }
 
         /* İlanlar Listesi (Grid) */
@@ -213,6 +294,21 @@
             color: #999;
         }
 
+        .car-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #486074;
+            font-size: 13px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .car-link:hover {
+            color: #dfa21a;
+        }
+
         /* Alt Bilgi (Footer) */
         footer {
             background-color: #333;
@@ -226,9 +322,6 @@
 
         /* Responsive Tasarım */
         @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
             header {
                 flex-direction: column;
                 padding: 15px;
@@ -236,9 +329,12 @@
             }
             .nav-links {
                 margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
             }
-            .nav-links a {
-                margin: 0 10px;
+            .dropdown-menu {
+                right: -80px;
+                min-width: 280px;
             }
         }
     </style>
@@ -252,9 +348,33 @@
         </div>
         <div class="nav-links">
             <a href="#">Ana Sayfa</a>
-            <a href="#">Tüm İlanlar</a>
-            <a href="#">Hakkımızda</a>
-            <a href="#">İletişim</a>
+
+            <!-- Hakkımızda Dropdown -->
+            <div class="dropdown">
+                <span class="dropdown-trigger" onclick="toggleDropdown(this)">Hakkımızda</span>
+                <div class="dropdown-menu">
+                    <h4>ℹ️ Hakkımızda</h4>
+                    <p>Bin Motors olarak Bursa'da güvenilir araç satışı hizmeti vermekteyiz. Müşteri memnuniyetini ön planda tutarak, titizlikle seçtiğimiz araçları siz değerli müşterilerimize sunuyoruz.</p>
+                    <p>Hatasız, düşük kilometreli ve garantili araçlarımızla hizmetinizdeyiz.</p>
+
+                    <div class="team-box">
+                        <p><strong>Kodlama:</strong> Ömer Baki Mollaoğlu</p>
+                        <p><strong>Satış Danışmanları:</strong> Ahmet Mollaoğlu, Emrah Mollaoğlu</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İletişim Dropdown -->
+            <div class="dropdown">
+                <span class="dropdown-trigger" onclick="toggleDropdown(this)">İletişim</span>
+                <div class="dropdown-menu">
+                    <h4>📞 Bize Ulaşın</h4>
+                    <p><strong>Yetkili:</strong> Bin Motors Yetkilisi</p>
+                    <p><strong>Telefon:</strong> 0 532 662 80 45</p>
+                    <a href="tel:+905326628045" class="btn btn-gold">📞 Hemen Ara</a>
+                    <a href="https://www.google.com/maps/dir//2.+%C3%87%C4%B1nar+Cd.+No:47+D:2,+G%C3%BCne%C5%9Ftepe,+16200+Osmangazi%CC%87%2FBursa/@40.257521,29.0056595,17z/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x14ca1518d75b6b0b:0x3e267772fba6832e!3e0?utm_campaign=ml-ardi-ahc_2026&g_ep=Eg1tbF8yMDI2MDcxNF8wIJvbDyoASAJQAQ%3D%3D" target="_blank" class="btn btn-blue">🗺️ Yol Tarifi Al</a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -266,89 +386,86 @@
 
     <!-- Ana İçerik -->
     <div class="container">
-        
-        <!-- Yan Menü -->
-        <aside class="sidebar">
-            <div class="store-info">
-                <h3>Mağaza Bilgileri</h3>
-                <p><strong>Yetkili:</strong> Bin Motors Yetkilisi</p>
-                <p><strong>Telefon:</strong> 0 532 662 80 45</p>
-                <p><strong>Adres:</strong> Bursa / Türkiye</p>
-                        </div>
+        <div class="listings-title">
+            <h2>Araba İlanları</h2>
+        </div>
+
+        <div class="listings-grid">
+
+            <!-- İlan 1 -->
+            <div class="car-card">
+                <img src="https://i0.shbdn.com/photos/33/66/27/x5_1326336627n06.jpg" alt="Araç" class="car-img">
+                <div class="car-details">
+                    <div class="car-title">BİN MOTORS'DAN DÜŞÜK KM'Lİ HATASIZ 2024 HYUNDAİ BAYON 1.4 ELİTE</div>
+                    <div class="car-specs">2024 | 13.900 KM | Otomatik</div>
+                    <div class="car-price-location">
+                        <span class="car-price">1.600.000 TL</span>
+                        <span class="car-location">Bursa / Osmangazi</span>
+                    </div>
+                    <a href="https://www.sahibinden.com/ilan/vasita-arazi-suv-pickup-hyundai-bin-motors-dan-dusuk-km-li-hatasiz-2024-hyundai-bayon-1.4-elite-1326336627/detay" class="car-link">Sahibindeki İlana Git →</a>
                 </div>
-           </div> 
-      </div>
-        <a href="tel:+905326628045">
-    <button>Bizi Ara</button>
-</a>
-
-
-        <!-- İlanlar -->
-        <main>
-            <div class="listings-title">
-                <h2>Araba İlanları</h2>
             </div>
 
-            <div class="listings-grid">
-                
-                <!-- İlan 1 -->
-                <div class="car-card">
-                    <img src="https://i0.shbdn.com/photos/33/66/27/x5_1326336627n06.jpg" alt="Araç" class="car-img">
-                    <div class="car-details">
-                        <div class="car-title">BİN MOTORS'DAN DÜŞÜK KM'Lİ HATASIZ 2024 HYUNDAİ BAYON 1.4 ELİTE</div>
-                        <div class="car-specs">2024 | 13.900 KM | Otomatik</div>
-                        <div class="car-price-location">
-                            <span class="car-price">1.600.000 TL</span>
-                            <span class="car-location">  Bursa / Osmangazi  </span>
-                            <a href="https://www.sahibinden.com/ilan/vasita-arazi-suv-pickup-hyundai-bin-motors-dan-dusuk-km-li-hatasiz-2024-hyundai-bayon-1.4-elite-1326336627/detay">Sahibindeki İlana Git</a>
-                        </div>
+            <!-- İlan 2 -->
+            <div class="car-card">
+                <img src="https://i0.shbdn.com/photos/59/88/93/x5_1325598893ah3.jpg" alt="Araç" class="car-img">
+                <div class="car-details">
+                    <div class="car-title">BİN MOTORS'DAN Tiggo 8 Pro 1.6 TGDI Avantgarde HATASIZ BOYASIZ</div>
+                    <div class="car-specs">2024 | 24.300 KM | 3 Mod</div>
+                    <div class="car-price-location">
+                        <span class="car-price">1.975.000 TL</span>
+                        <span class="car-location">Bursa / Osmangazi</span>
                     </div>
+                    <a href="https://www.sahibinden.com/ilan/vasita-arazi-suv-pickup-chery-bin-motors-dan-tiggo-8-pro-1.6-tgdi-avantgarde-hatasiz-boyasiz-1325598893/detay" class="car-link">Sahibindeki İlana Git →</a>
                 </div>
-
-                <!-- İlan 2 -->
-                <div class="car-card">
-                    <img src="https://i0.shbdn.com/photos/59/88/93/x5_1325598893ah3.jpg" alt="Araç" class="car-img">
-                    <div class="car-details">
-                        <div class="car-title">BİN MOTORS'DAN Tiggo 8 Pro 1.6 TGDI Avantgarde HATASIZ BOYASIZ</div>
-                        <div class="car-specs">2024 |  24.300 KM | 3 Mod</div>
-                        <div class="car-price-location">
-                            <span class="car-price">1.975.000 TL</span>
-                            <span class="car-location">  Bursa / Osmangazi</span>
-                            <a href="https://www.sahibinden.com/ilan/vasita-arazi-suv-pickup-chery-bin-motors-dan-tiggo-8-pro-1.6-tgdi-avantgarde-hatasiz-boyasiz-1325598893/detay">Sahibindeki İlana Git</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- İlan 3 -->
-                <div class="car-card">
-                    <img src="https://i0.shbdn.com/photos/69/97/50/x5_13256997503ji.jpg" alt="Araç" class="car-img">
-                    <div class="car-details">
-                        <div class="car-title">BİN MOTORS'DAN Renault Clio 1.0 TCe Touch X-Tronic HATSIZ/BYASZ</div>
-                        <div class="car-specs">2023 | 43.000 KM | Otomatik</div>
-                        <div class="car-price-location">
-                            <span class="car-price">1.255.000 TL</span>
-                            <span class="car-location">  Bursa / Osmangazi                           
-                            <a href="https://www.sahibinden.com/ilan/vasita-otomobil-renault-bin-motors-dan-renault-clio-1.0-tce-touch-x-tronic-hatsiz-byasz-1325699750/detay">Sahibindeki İlana Git</a>
-                                                                 </div>
-                                                           </div>
-                                                     </div>
-                                               </div>
-                                         </div>
-                                    </div>
-                              </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-        </main>
+
+            <!-- İlan 3 -->
+            <div class="car-card">
+                <img src="https://i0.shbdn.com/photos/69/97/50/x5_13256997503ji.jpg" alt="Araç" class="car-img">
+                <div class="car-details">
+                    <div class="car-title">BİN MOTORS'DAN Renault Clio 1.0 TCe Touch X-Tronic HATSIZ/BYASZ</div>
+                    <div class="car-specs">2023 | 43.000 KM | Otomatik</div>
+                    <div class="car-price-location">
+                        <span class="car-price">1.255.000 TL</span>
+                        <span class="car-location">Bursa / Osmangazi</span>
+                    </div>
+                    <a href="https://www.sahibinden.com/ilan/vasita-otomobil-renault-bin-motors-dan-renault-clio-1.0-tce-touch-x-tronic-hatsiz-byasz-1325699750/detay" class="car-link">Sahibindeki İlana Git →</a>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <!-- Alt Bilgi -->
     <footer>
-        <p>&copy; 2026 BIN MOTORS. Bu site sahibinden.com kurumsal mağaza konseptinden esinlenerek tasarlanmıştır.
-        Kodlama Ömer Baki Mollaoğlu | Satış Danışmanları Ahmet Mollaoğlu Emrah Mollaoğlu </p>
+        <p>&copy; 2026 BIN MOTORS. Bu site sahibinden.com kurumsal mağaza konseptinden esinlenerek tasarlanmıştır.</p>
     </footer>
 
+    <script>
+        function toggleDropdown(trigger) {
+            const allMenus = document.querySelectorAll('.dropdown-menu');
+            const allTriggers = document.querySelectorAll('.dropdown-trigger');
+
+            const currentMenu = trigger.nextElementSibling;
+            const isOpen = currentMenu.classList.contains('show');
+
+            allMenus.forEach(menu => menu.classList.remove('show'));
+            allTriggers.forEach(t => t.classList.remove('active'));
+
+            if (!isOpen) {
+                currentMenu.classList.add('show');
+                trigger.classList.add('active');
+            }
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show'));
+                document.querySelectorAll('.dropdown-trigger').forEach(t => t.classList.remove('active'));
+            }
+        });
+    </script>
+
 </body>
-                                                                     </html>
+</html>
