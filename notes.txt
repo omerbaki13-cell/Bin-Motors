@@ -1,0 +1,42 @@
+1. Bin-Motors V1
+__________________________
+
+1.İlan Linkli
+__________________________
+
+"        <div class="car-card">
+                <img src="https://i0.shbdn.com/photos/33/66/27/x5_1326336627n06.jpg" alt="Araç" class="car-img">
+                <div class="car-details">
+                    <div class="car-title">TİGUAN 1.4 TSİ CHROME EDİTİON 2013 MODEL CAM TAVAN LED XENON</div>
+                    <div class="car-specs">2013 | 81.000 KM | Manuel</div>
+                    <div class="car-price-location">
+                        <span class="car-price">1.320.000 TL</span>
+                        <span class="car-location">Bursa / Osmangazi</span>
+                    </div>
+                    <a href="https://www.sahibinden.com/ilan/vasita-arazi-suv-pickup-volkswagen-tiguan-1.4-tsi-chrome-edition-2013-model-cam-tavan-led-xenon-1338710504/detay" class="car-link">Sahibindeki İlana Git →</a>
+                </div>
+            </div>"
+_______________________
+
+2.İlan Görselli
+_______________________
+
+"                <img src="tiguan.png" alt="2013 Volkswagen Tiguan" class="car-img">
+                <div class="car-details">
+                    <div class="car-title">VOLKSWAGEN TİGUAN 1.4 TSI CHROME EDITION</div>
+                    <div class="car-specs">2013 | 81.000 KM | Manuel | Takas ✔️</div>
+                    <div class="car-price-location">
+                        <span class="car-price">1.320.000 TL</span>
+                        <span class="car-location">Bursa / Osmangazi</span>
+                    </div>
+                    <a href="https://www.sahibinden.com/ilan/vasita-arazi-suv-pickup-volkswagen-tiguan-1.4-tsi-chrome-edition-2013-model-cam-tavan-led-xenon-1338710504/detay" class="car-link">Sahibindeki İlana Git →</a>
+                </div>
+            </div>"
+_____________________
+
+3.Google Search Değişiklikleri
+______________________
+
+V1.0 Hiç Bişey Yoktu O Yüzden Logosuz İsimsizdi
+
+V1.5 Yakında
