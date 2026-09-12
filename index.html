@@ -339,6 +339,23 @@
             color: #dfa21a;
         }
 
+        /* Satılanlar Bölümü - satılan araçlar için üzeri şerit görünümü */
+        .sold-badge {
+            display: inline-block;
+            background: #b23b3b;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .section-spacer {
+            margin-top: 50px;
+        }
+
         /* Alt Bilgi (Footer) */
         footer {
             background-color: #333;
@@ -377,7 +394,8 @@
             <h1>BIN<span>MOTORS</span></h1>
         </div>
         <div class="nav-links">
-            <a href="#">Ana Sayfa</a>
+            <a href="#" onclick="sayfaGoster('anasayfa'); return false;">Ana Sayfa</a>
+            <a href="#" onclick="sayfaGoster('satilanlar'); return false;">Satılanlar</a>
 
             <!-- Hakkımızda Dropdown -->
             <div class="dropdown">
@@ -407,6 +425,9 @@
             </div>
         </div>
     </header>
+
+    <!-- ANA SAYFA İÇERİĞİ -->
+    <div id="anasayfa-icerik">
 
     <!-- Banner -->
     <section class="hero">
@@ -466,6 +487,67 @@
 
         </div>
     </div>
+    </div>
+    <!-- ANA SAYFA İÇERİĞİ SONU -->
+
+    <!-- SATILANLAR SAYFASI (varsayılan gizli) -->
+    <div id="satilanlar-icerik" style="display:none;">
+    <div class="container">
+        <div class="listings-title">
+            <h2>Satılanlar</h2>
+        </div>
+
+        <div class="listings-grid">
+
+            <!-- Satılan İlan 1 (Boş - düzenlenecek) -->
+            <div class="car-card">
+                <img src="images/satilan1.png" alt="Araç" class="car-img">
+                <div class="car-details">
+                    <span class="sold-badge">SATILDI</span>
+                    <div class="car-title">İlan Başlığı Buraya Gelecek</div>
+                    <div class="car-specs">Yıl | KM | Vites</div>
+                    <div class="car-price-location">
+                        <span class="car-price">Fiyat</span>
+                        <span class="car-location">Bursa / Osmangazi</span>
+                    </div>
+                    <a href="#" class="car-link">Sahibindeki İlana Git →</a>
+                </div>
+            </div>
+
+            <!-- Satılan İlan 2 (Boş - düzenlenecek) -->
+            <div class="car-card">
+                <img src="images/satilan2.png" alt="Araç" class="car-img">
+                <div class="car-details">
+                    <span class="sold-badge">SATILDI</span>
+                    <div class="car-title">İlan Başlığı Buraya Gelecek</div>
+                    <div class="car-specs">Yıl | KM | Vites</div>
+                    <div class="car-price-location">
+                        <span class="car-price">Fiyat</span>
+                        <span class="car-location">Bursa / Osmangazi</span>
+                    </div>
+                    <a href="#" class="car-link">Sahibindeki İlana Git →</a>
+                </div>
+            </div>
+
+            <!-- Satılan İlan 3 (Boş - düzenlenecek) -->
+            <div class="car-card">
+                <img src="images/satilan3.png" alt="Araç" class="car-img">
+                <div class="car-details">
+                    <span class="sold-badge">SATILDI</span>
+                    <div class="car-title">İlan Başlığı Buraya Gelecek</div>
+                    <div class="car-specs">Yıl | KM | Vites</div>
+                    <div class="car-price-location">
+                        <span class="car-price">Fiyat</span>
+                        <span class="car-location">Bursa / Osmangazi</span>
+                    </div>
+                    <a href="#" class="car-link">Sahibindeki İlana Git →</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <!-- SATILANLAR SAYFASI SONU -->
 
     <!-- Alt Bilgi -->
     <footer>
@@ -473,6 +555,21 @@
     </footer>
 
     <script>
+        function sayfaGoster(hedef) {
+            const anasayfa = document.getElementById('anasayfa-icerik');
+            const satilanlar = document.getElementById('satilanlar-icerik');
+
+            if (hedef === 'satilanlar') {
+                anasayfa.style.display = 'none';
+                satilanlar.style.display = 'block';
+            } else {
+                satilanlar.style.display = 'none';
+                anasayfa.style.display = 'block';
+            }
+
+            window.scrollTo(0, 0);
+        }
+
         function toggleDropdown(trigger) {
             const allMenus = document.querySelectorAll('.dropdown-menu');
             const allTriggers = document.querySelectorAll('.dropdown-trigger');
